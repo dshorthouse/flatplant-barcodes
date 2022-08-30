@@ -1,6 +1,6 @@
 # Flatplant Barcodes
 
-Sample ruby script using zbar to extract barcodes from images.
+Sample ruby script using zbar to extract barcodes from images then fire off a request to GBIF & fish for specimen data.
 
 ## Requirements
 

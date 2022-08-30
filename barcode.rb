@@ -19,14 +19,33 @@ class Barcode
     @barcodes
   end
 
-  def gbif(key: "catalogNumber")
+  def gbif
     data = []
     @barcodes.each do |barcode|
       response = RestClient::Request.execute(
-        method: :get,
-        url: "https://api.gbif.org/v1/occurrence/search?#{key}=#{barcode}"
+        method: :post,
+        headers: { "Content-Type": "application/json", accept: :json },
+        url: "https://api.gbif.org/v1/occurrence/search/predicate",
+        content_type: :json,
+        payload: { predicate: { type: "or", predicates: [
+          {
+            type: "equals",
+            key: "CATALOG_NUMBER",
+            value: barcode
+          },
+          {
+            type: "equals",
+            key: "OTHER_CATALOG_NUMBERS",
+            value: barcode
+          },
+          {
+            type: "equals",
+            key: "OCCURRENCE_ID",
+            value: barcode
+          }
+        ] } }.to_json
       )
-      data << JSON.parse(response, :symbolize_names => true)
+      data << JSON.parse(response, symbolize_names: true)
     end
     data
   end

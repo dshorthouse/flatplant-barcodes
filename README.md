@@ -13,7 +13,7 @@ Sample ruby script using zbar to extract barcodes from images.
 $ gem install mini_magick rest_client zbar
 $ irb
 > require "./barcode"
-> barcode = Barcode.new("Preview001.jpg")
+> barcode = Barcode.new(file_path: "Preview001.jpg")
 > barcode.extract
 => ["CHR 605113 A", "01-01601413"]
 > pp barcode.gbif

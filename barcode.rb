@@ -42,6 +42,11 @@ class Barcode
             type: "equals",
             key: "OCCURRENCE_ID",
             value: barcode
+          },
+          {
+            type: "equals",
+            key: "RECORD_NUMBER",
+            value: barcode
           }
         ] } }.to_json
       )
